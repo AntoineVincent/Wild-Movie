@@ -14,12 +14,31 @@
 		</div>
 	</div>
 	<div class="col-md-10 col-md-offset-1">
-		<div class="col-md-12">
+		<div class="col-md-12 comment-div">
 			<h2>Commentaires : </h2>
 			<hr>
-
-			{# CODE HERE #}
+			{% if comments is empty %}
+					<p class="comment-none">Aucun Commentaires sur ce film</p>
+			{% else %}
+				{% for comment in comments %}
+					<div class="col-md-12 comment">
+						<div class="col-md-12 entete">
+							<div class="col-md-6">
+								<h4><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> {{ comment.titre }}</h4>
+							</div>
+							<div class="col-md-6">
+								<p class="infos">publié par {{ comment.author }} et
+								Poster le : {{ comment.date }}</p>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<p class="content">{{ comment.contenu }}</p>
+						</div>
+					</div>
+				{% endfor %}
+			{% endif %}
 		</div>
+		<a class="btn-primary btn" href="{{ path('new_com', { 'id': movie.id }) }}"> Ajouter un Commentaire </a>
 	</div>
 
 {% endblock %}

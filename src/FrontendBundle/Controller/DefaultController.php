@@ -62,10 +62,12 @@ class DefaultController extends Controller
         $user = $this->container->get('security.context')->getToken()->getUser();
 
         $thisMovie = $em->getRepository('FrontendBundle:Film')->findOneById($id);
+        $comments = $em->getRepository('CommentaireBundle:Comment')->findByIdfilm($id);
 
         return $this->render('FrontendBundle:Default:show.html.twig',
         	array(
         		'movie' => $thisMovie,
+                'comments' => $comments,
         ));
 
     }

@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+<div class="col-md-3"></div>
+<div class="col-md-6 form-comment">
+	<div class="col-md-12">
+		{% for label, flashes in app.session.flashbag.all %}
+	    	{% for flash in flashes %}
+	        	<div class="alert alert-{{ label }}">
+	            		{{ flash }}
+	        	</div>
+	    	{% endfor %}
+		{% endfor %}
+	</div>
+	<div class="col-md-12 input-div">
+		<h4 class="com-title-form">Poster un Commentaire sur le film : {{ movie.titre }}</h4>
+	</div>
+	<form action="{{ path('post_com', { 'id': movie.id }) }}" method="post">
+		<div class="col-md-12 input-div">
+			<div class="col-md-5">
+				<label class="comment-label" for="date">Date:</label>
+			</div> 
+			<div class="col-md-7">
+				<p>{{ "now"|date("d/m/Y") }}</p>
+				<input type="hidden" name="date" value="{{ "now"|date("d/m/Y") }}"/>
+			</div>
+		</div>
+		<div class="col-md-12 input-div">
+			<div class="col-md-5">
+				<label class="comment-label" for="titre">Titre:</label>
+			</div> 
+			<div class="col-md-7">
+				<input type="float "name="titre" value=""/>
+			</div>
+		</div>
+		<div class="col-md-12 input-div">
+			<div class="col-md-5">
+				<label class="comment-label" for="contenu">Commentaire:</label>
+			</div> 
+			<div class="col-md-7">
+				<textarea type="text "name="contenu" value=""></textarea>
+			</div>
+		</div>
+		<div class="col-md-12 input-div">
+			<div class="col-md-4">
+				<input type="hidden" name="hidden" value="1"/>
+				<input type="submit" class="btn btn-primary" value="Envoyer"/>
+			</div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<a class="btn-primary btn" href="{{ path('film_show', {'id': movie.id}) }}"> Retour Fiche </a>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="col-md-3"></div>
+
+
+
+{% endblock %}

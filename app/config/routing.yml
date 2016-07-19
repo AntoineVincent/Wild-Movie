@@ -11,3 +11,10 @@ app:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+new_com:
+    path:    /new/comment/{id}
+    defaults: { _controller: CommentaireBundle:Default:newcom }
+
+post_com:
+    path:    /post/comment/{id}
+    defaults: { _controller: CommentaireBundle:Default:postcom }

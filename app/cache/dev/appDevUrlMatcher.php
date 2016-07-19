@@ -327,6 +327,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
         not_fos_user_change_password:
 
+        // new_com
+        if (0 === strpos($pathinfo, '/new/comment') && preg_match('#^/new/comment/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'new_com')), array (  '_controller' => 'CommentaireBundle\\Controller\\DefaultController::newcomAction',));
+        }
+
+        // post_com
+        if (0 === strpos($pathinfo, '/post/comment') && preg_match('#^/post/comment/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'post_com')), array (  '_controller' => 'CommentaireBundle\\Controller\\DefaultController::postcomAction',));
+        }
+
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
 }
